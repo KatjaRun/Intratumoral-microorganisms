@@ -19,7 +19,7 @@ token=$4
 echo "[+] The id being downloaded: $id"
 
 # Download the file 
-#! gdc-client download $id -t $token -d $bampath
+gdc-client download $id -t $token -d $bampath
 
 # Getting input
 input="$bampath/$id/*.bam" 
@@ -38,28 +38,28 @@ barcode=${R_OUTPUT:0:16}
 echo "[+] The barcode is: $R_OUTPUT, or shortened: $barcode"
 
 # Filtering out unmapped reads
-#!tmpoutput=$pathout/$barcode
+tmpoutput=$pathout/$barcode
 
-#!echo "[+] The tmp output is: $tmpoutput"
+echo "[+] The tmp output is: $tmpoutput"
 
-#!tmps1=$tmpoutput"_tmps1.bam"
-#!tmps2=$tmpoutput"_tmps2.bam"
-#!tmps3=$tmpoutput"_tmps3.bam"
+tmps1=$tmpoutput"_tmps1.bam"
+tmps2=$tmpoutput"_tmps2.bam"
+tmps3=$tmpoutput"_tmps3.bam"
 
-#!samtools view -u -f 4  -F 264 $input  > $tmps1
-#!samtools view -u -f 8  -F 260 $input  > $tmps2
-#!samtools view -u -f 12 -F 256 $input  > $tmps3
+samtools view -u -f 4  -F 264 $input  > $tmps1
+samtools view -u -f 8  -F 260 $input  > $tmps2
+samtools view -u -f 12 -F 256 $input  > $tmps3
 
 # Merge all tmp files
-#!merged_unaligned=$tmpoutput"_merged.bam"
+merged_unaligned=$tmpoutput"_merged.bam"
 
-#!samtools merge -u - $tmps1 $tmps2 $tmps3 | samtools sort -n - -T tmp_sort -o $merged_unaligned
+samtools merge -u - $tmps1 $tmps2 $tmps3 | samtools sort -n - -T tmp_sort -o $merged_unaligned
 
-#!echo "[+] Created merged unaligned output: $merged_unaligned"
+echo "[+] Created merged unaligned output: $merged_unaligned"
 
-#!rm $tmpoutput"_tmps1.bam"
-#!rm $tmpoutput"_tmps2.bam"
-#!rm $tmpoutput"_tmps3.bam"
+rm $tmpoutput"_tmps1.bam"
+rm $tmpoutput"_tmps2.bam"
+rm $tmpoutput"_tmps3.bam"
 
 # File names for output
 output1=$pathout/$barcode"_R1.fq.gz"
@@ -68,7 +68,7 @@ output2=$pathout/$barcode"_R2.fq.gz"
 echo "[+] Creating output files: $output1 and $output2 ."
 
 ## Creating fastq files
-#!gatk SamToFastq -I $merged_unaligned -F $output1 -F2 $output2 -NON_PF true
+gatk SamToFastq -I $merged_unaligned -F $output1 -F2 $output2 -NON_PF true
 
 
 ## Starting identification pipeline
