@@ -11,7 +11,7 @@ Scripts from the master thesis:
 - 02_check_files.sh: Checks if each bam file has Bracken output
 
 - 03_create_biom.sh: Creates BIOM file of all Bracken outputs with the 03_create_biom.py
-
+<br>
 
 > Analysis_OV\
 > Different analysis performed on each cancer type, as example for ovarian cancer
@@ -26,6 +26,7 @@ Scripts from the master thesis:
 - 07_Survival_Analysis.R: Performing Cox proportional hazards model to assess impact on overall survival of core species
 - 08_Correaltion_GSVA.R: Computing GSVA scores and correlating them to core species abundance
 - 09_Interesting_species.R: Creating an Euler diagram to assess species significant in performed analyses
+<br>
 
 > Additional
 - DESeq_PAAD_NAT.R: Performing differential abundance analysis for pancreatic tumor and normal samples
